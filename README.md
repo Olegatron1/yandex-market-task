@@ -16,6 +16,7 @@
 
 - git clone
 - cd yandex-market-task
+- composer install
 - .env.example -> .env, подключить бд mysql
 - php artisan migrate 
 - php artisan serve
