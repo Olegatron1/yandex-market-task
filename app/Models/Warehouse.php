@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Warehouse extends Model
 {
     protected $guarded = false;
+
+	public $timestamps = false;
 
 	public function orders(): HasMany
 	{
@@ -24,4 +27,10 @@ class Warehouse extends Model
 	{
 		return $this->hasMany(Stock::class);
 	}
+
+	public function products(): BelongsToMany
+	{
+		return $this->belongsToMany(Product::class, 'stocks');
+	}
+
 }

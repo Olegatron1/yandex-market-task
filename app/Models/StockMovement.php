@@ -4,23 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Stock extends Model
+class StockMovement extends Model
 {
     protected $guarded = false;
-
-	public $timestamps = false;
-
-	public function warehouses(): BelongsToMany
-	{
-		return $this->belongsToMany(Warehouse::class);
-	}
-
-	public function products(): BelongsToMany
-	{
-		return $this->belongsToMany(Product::class);
-	}
 
 	public function product(): BelongsTo
 	{
@@ -30,5 +17,10 @@ class Stock extends Model
 	public function warehouse(): BelongsTo
 	{
 		return $this->belongsTo(Warehouse::class);
+	}
+
+	public function order(): BelongsTo
+	{
+		return $this->belongsTo(Order::class);
 	}
 }
