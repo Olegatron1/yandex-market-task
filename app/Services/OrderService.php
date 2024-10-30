@@ -81,6 +81,17 @@ class OrderService
 	{
 		if ($order->status === 'active') {
 			$order->update(['status' => 'completed']);
+
+			foreach ($order->orderItems as $item) {
+				StockMovement::create([
+					'product_id' => $item->product_id,
+					'warehouse_id' => $order->warehouse_id,
+					'quantity' => $item->count,
+					'action' => 'remove',
+					'order_id' => $order->id,
+				]);
+			}
+
 			return response()->json(['message' => 'Order completed successfully']);
 		}
 
